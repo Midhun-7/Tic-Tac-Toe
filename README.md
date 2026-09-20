@@ -5,18 +5,14 @@ A hands-on project to learn Go and LLD principles by building a tic-tac-toe game
 ## Project Structure
 
 ```
-tic-tac-toe-go/
+tic-tac-toe/
 ├── cmd/                    # Application entry point (main.go)
 ├── internal/               # Private application code
 │   ├── board/              # Board representation & logic
 │   ├── game/               # Game loop, rules, state management
 │   └── player/             # Player abstraction (human, AI later)
-├── pkg/
-│   └── utils/              # Shared utilities (input helpers, etc.)
-├── go.mod                  # (you'll create this with `go mod init`)
-├── progress.md             # Track your learning journey
-├── syntax_to_remember.md   # Go syntax quick-reference
-└── README.md               # This file
+├── go.mod
+└── README.md
 ```
 
 ## Learning Goals
