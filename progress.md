@@ -4,7 +4,7 @@
 
 ---
 
-## Current Phase: **Phase 2 — Methods & Game Logic**
+## Current Phase: **Phase 3 — Polish & Edge Cases**
 
 | # | Milestone | Status | Date |
 |---|-----------|--------|------|
@@ -13,12 +13,15 @@
 | 3 | Define the Board (data structure + methods) | ✅ | 2026-09-19 |
 | 4 | Define the Player (struct + constructor) | ✅ | 2026-09-19 |
 | 5 | Define the Game (struct) | ✅ | 2026-09-19 |
-| 6 | Display the board | ⬜ | — |
-| 7 | Implement Game loop | ⬜ | — |
-| 8 | Win / Draw detection logic | ⬜ | — |
-| 9 | Input validation & error handling | ⬜ | — |
-| 10 | Refactor & clean up | ⬜ | — |
-| 11 | (Stretch) AI opponent | ⬜ | — |
+| 6 | Display the board | ✅ | 2026-09-20 |
+| 7 | Win detection logic | ✅ | 2026-09-20 |
+| 8 | Implement Game loop | ✅ | 2026-09-20 |
+| 9 | **GAME IS PLAYABLE!** 🎉 | ✅ | 2026-09-20 |
+| 10 | Draw detection | ⬜ | — |
+| 11 | Input validation (out of bounds, invalid input) | ⬜ | — |
+| 12 | Refactor & clean up | ⬜ | — |
+| 13 | (Stretch) AI opponent | ⬜ | — |
+| 14 | (Stretch) Web frontend with Go HTTP server | ⬜ | — |
 
 ---
 
@@ -32,6 +35,7 @@
 | Player type | struct with constructor | Clean, only holds Name & Mark |
 | Turn tracking | `CurrentPlayer int` in Game | Index into Players array; Game owns turn logic |
 | Two players | `[2]player.Player` array | Fixed count, array over slice |
+| Win check ownership | Board method | Board knows its own grid (encapsulation) |
 
 ---
 
@@ -45,6 +49,10 @@
 6. **Can't define methods on types from other packages**
 7. **Constructor pattern** — `NewTypeName()` returning a pointer
 8. **Code must be inside functions** — no floating statements
+9. **0-indexed arrays** — Go arrays start at 0, not 1
+10. **Empty string gotcha** — `"" == ""` is true, always check `!= ""` before comparing
+11. **Program entry point** — must have `package main` + `func main()`
+12. **Import path** — starts with module name: `"tic-tac-toe/internal/board"`
 
 ---
 
@@ -53,7 +61,13 @@
 ### Session 1 — 2026-09-19
 - Created project folder structure
 - Designed and implemented all 3 core entities: Board, Player, Game
-- Board: `[3][3]string` with `PlaceMark` method (pointer receiver)
-- Player: `Name` + `Mark` with `NewPlayer` constructor
-- Game: holds Board, 2 Players, CurrentPlayer index
-- Next: Display the board, then build the game loop
+- Linked project to GitHub
+
+### Session 2 — 2026-09-20
+- Implemented Display with grid formatting
+- Implemented CheckWin (rows, columns, both diagonals)
+- Fixed empty cell matching bug
+- Implemented game loop with turn switching
+- Winner announcement with correct player name
+- **First successful game run! 🎉**
+- Next: Draw detection, input validation
