@@ -1,17 +1,21 @@
 package board
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Board struct {
 	grid [3][3]string
 }
 
-func (b *Board) PlaceMark(row, col int, mark string) {
+func (b *Board) PlaceMark(row, col int, mark string) error {
 	if b.grid[row][col] != "" {
-		fmt.Printf("Cell (%d, %d) is already occupied.\n", row, col)
+		err := fmt.Errorf("Cell (%d, %d) is already occupied.\n", row, col)
+		return err
 	} else {
 		b.grid[row][col] = mark
 		fmt.Printf("Board: (%d, %d): %s\n", row, col, mark)
+		return nil
 	}
 }
 
@@ -45,4 +49,15 @@ func (b *Board) CheckWin() bool {
 		}
 	}
 	return false
+}
+
+func (b *Board) CheckDraw() bool {
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			if b.grid[i][j] == "" {
+				return false
+			}
+		}
+	}
+	return true
 }

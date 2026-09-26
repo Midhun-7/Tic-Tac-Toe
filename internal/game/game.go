@@ -28,11 +28,21 @@ func (g *Game) Start() {
 			g.CurrentPlayer = (g.CurrentPlayer + 1) % 2
 			fmt.Printf("%s wins!\n", g.Players[g.CurrentPlayer].Name)
 			break
+		} else if g.Board.CheckDraw() == true {
+			fmt.Println("It's a draw!")
+			break
 		}
 		currentPlayer := g.Players[g.CurrentPlayer]
 		fmt.Printf("%s's turn (%s). Enter row and column (0-2): ", currentPlayer.Name, currentPlayer.Mark)
 		fmt.Scanf("%d %d", &row, &col)
-		g.Board.PlaceMark(row, col, currentPlayer.Mark)
+		if row < 0 || row > 2 || col < 0 || col > 2 {
+			fmt.Println("Invalid input. Please enter row and column between 0 and 2.")
+			continue
+		}
+		if err := g.Board.PlaceMark(row, col, currentPlayer.Mark); err != nil {
+			fmt.Println(err)
+			continue
+		}
 		g.CurrentPlayer = (g.CurrentPlayer + 1) % 2
 	}
 }
