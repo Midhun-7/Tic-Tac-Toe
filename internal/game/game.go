@@ -12,10 +12,10 @@ type Game struct {
 	CurrentPlayer int              // index: 0 or 1
 }
 
-func NewGame(player1Name, player2Name string) *Game {
+func NewGame(p1 player.Player, p2 player.Player) *Game {
 	return &Game{
 		Board:         board.Board{},
-		Players:       [2]player.Player{player.NewHumanPlayer(player1Name, "X"), player.NewHumanPlayer(player2Name, "O")},
+		Players:       [2]player.Player{p1, p2},
 		CurrentPlayer: 0,
 	}
 }

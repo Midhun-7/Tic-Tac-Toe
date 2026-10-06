@@ -61,3 +61,15 @@ func (b *Board) CheckDraw() bool {
 	}
 	return true
 }
+
+func (b *Board) GetAvailableMoves() [][2]int {
+	var moves [][2]int
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			if b.grid[i][j] == "" {
+				moves = append(moves, [2]int{i, j})
+			}
+		}
+	}
+	return moves
+}

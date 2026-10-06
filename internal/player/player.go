@@ -2,6 +2,7 @@ package player
 
 import (
 	"fmt"
+	"math/rand"
 	"tic-tac-toe/internal/board"
 )
 
@@ -44,4 +45,27 @@ func (h *HumanPlayer) GetMove(b *board.Board) (int, int) {
 		fmt.Scanf("%d %d", &row, &col)
 		return row, col
 	}
+}
+
+func NewBotPlayer(name, mark string) *BotPlayer {
+	return &BotPlayer{
+		Name: name,
+		Mark: mark,
+	}
+}
+
+func (bot *BotPlayer) GetName() string {
+	return bot.Name
+}
+
+func (bot *BotPlayer) GetMark() string {
+	return bot.Mark
+}
+
+func (bot *BotPlayer) GetMove(b *board.Board) (int, int) {
+	moves := b.GetAvailableMoves()
+	length := len(moves)
+	index := rand.Intn(length)
+	chosenMove := moves[index]
+	return chosenMove[0], chosenMove[1]
 }
